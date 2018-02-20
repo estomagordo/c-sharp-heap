@@ -57,11 +57,12 @@ namespace NUnit.HeapTests
 
             heap.Push(item);
             var preSize = heap.Size;
-            heap.Pop();
+            var result = heap.Pop();
             var postSize = heap.Size;
 
             Assert.AreEqual(1, preSize);
             Assert.AreEqual(0, postSize);
+            Assert.AreEqual(item, result);
         }
 
         [Test]
