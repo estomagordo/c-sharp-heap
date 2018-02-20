@@ -44,10 +44,10 @@ namespace Heap
             return _container[0];
         }
 
-        public void Insert(T item)
+        public void Push(T item)
         {
             _container.Add(item);
-            var pos = Size;
+            var pos = Size - 1;
             var parent = (pos - 1) / 2;
 
             while (parent >= 0 && _container[pos].CompareTo(_container[parent]) > 0)
