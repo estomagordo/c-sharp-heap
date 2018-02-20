@@ -30,7 +30,7 @@ namespace Heap
 
         public Heap(List<T> data)
         {
-            _container = data;
+            _container = new List<T>(data);
             Build();
         }
 
