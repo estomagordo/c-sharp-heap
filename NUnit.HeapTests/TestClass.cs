@@ -48,5 +48,58 @@ namespace NUnit.HeapTests
             Assert.AreEqual(1, preSize);
             Assert.AreEqual(1, postSize);
         }
+
+        [Test]
+        public void Pop_RemovesOneElement()
+        {
+            var heap = new Heap<int>();
+            var item = 321;
+
+            heap.Push(item);
+            var preSize = heap.Size;
+            heap.Pop();
+            var postSize = heap.Size;
+
+            Assert.AreEqual(1, preSize);
+            Assert.AreEqual(0, postSize);
+        }
+
+        [Test]
+        public void ListConstructor_WorksAsIntended()
+        {
+            var list = new List<int> { 25, -22, 1, 521, 55 };
+            var heap = new Heap<int>(list);
+
+            Assert.AreEqual(false, heap.Empty);
+            Assert.AreEqual(list.Count, heap.Size);
+        }
+
+        [Test]
+        public void ListConstructor_HeapSorts()
+        {
+            var list = new List<int> { 25, -22, 1, 521, 55 };
+            var heap = new Heap<int>(list);
+
+            Assert.AreEqual(521, heap.Pop());
+            Assert.AreEqual(55, heap.Pop());
+            Assert.AreEqual(25, heap.Pop());
+            Assert.AreEqual(1, heap.Pop());
+            Assert.AreEqual(-22, heap.Pop());
+        }
+
+        [Test]
+        public void DefaultConstructorWithSequentialInsert_HeapSorts()
+        {
+            var list = new List<int> { 25, -22, 1, 521, 55 };
+            var heap = new Heap<int>();
+
+            list.ForEach(item => heap.Push(item));
+
+            Assert.AreEqual(521, heap.Pop());
+            Assert.AreEqual(55, heap.Pop());
+            Assert.AreEqual(25, heap.Pop());
+            Assert.AreEqual(1, heap.Pop());
+            Assert.AreEqual(-22, heap.Pop());
+        }
     }
 }
